@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+
+  "name": "EN extension",
+  "description": "This extension helps you to work with en.cx site.",
+  "version": "1.0",  
+  "browser_action": {
+    "default_icon": {"19": "enlogo.png", "38": "enlogo.png" },
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "permissions": [
+          "tabs"
+   ],
+  "content_scripts": [
+    {
+      "matches": ["http://*.en.cx/*", "http://*.encounter.cx/*", "http://*.encounter.ru/*", "http://*.en-world.org/*"],      
+      "js": ["jquery-1.11.0.min.js", "content.js"]
+    }
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  }
+  
+  
+  
+}
