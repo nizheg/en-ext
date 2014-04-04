@@ -19,9 +19,11 @@ $(function() {
 			var titleRow = $('#row_title');
 			var sectorsInfoRow = $('#row_sectors_info');
 			var sectorsRow = $('#row_sectors');
+			var correctsRow = $('#corrects');
 			titleRow.html('');
 			sectorsInfoRow.html('');
 			sectorsRow.html('');
+			correctsRow.html('');
 			if (request.title) {
 				titleRow.html(request.title);
 			}
@@ -31,6 +33,18 @@ $(function() {
 			if (request.sectors) {
 				sectorsRow.html(request.sectors);
 			}
+			if (request.corrects) {
+				correctsRow.html(request.corrects);
+			}
+			var bonus_count = '?';
+			var bonus_done_count = '?';
+			if (typeof request.bonus_count != 'undefined') {
+				bonus_count = request.bonus_count;
+			}
+			if (typeof request.done_bonus_count != 'undefined') {
+				bonus_done_count = request.done_bonus_count;
+			}
+			$('#bonus_info').html('Выполнено бонусов ' + bonus_done_count + '. Осталось ' + bonus_count);
 		}
 	);
 });

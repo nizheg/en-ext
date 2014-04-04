@@ -15,6 +15,10 @@
 	  .color_dis {
 	    color: rgb(172, 170, 185);
 	  }
+	  .color_bonus {
+		color: navy;
+		font-weight: bolder;
+	  }
 	  #row_title {
 		font-size: large;
 	  }
@@ -26,9 +30,12 @@
     <script src="popup.js"></script>
   </head>
   <body>  
-	<input id="answer_box" type="text" autofocus style="float:right"></input> 
+	<input id="answer_box" type="text" autofocus style="float:right"></input>
+	<span id="bonus_info"></span> 
 	<table width = "400px">
-		<tr><td id="row_title"></td></tr>
+		<tr><td id="corrects"></td></tr>
+		<tr><td><hr/></td></tr>
+		<tr><td id="row_title"></td></tr>	
 		<tr><td id="row_sectors_info"></td></tr>
 		<tr><td id="row_sectors"></td></tr>
 	</table>
