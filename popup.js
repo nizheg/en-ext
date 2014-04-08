@@ -1,12 +1,10 @@
 $(function() {
 	$('#answer_box').change(
 		function() {			
-			chrome.tabs.query({currentWindow: true, url: 'http://*.' + localStorage["domain"] + '/gameengines/encounter/play/*'}, 
+			chrome.tabs.query({currentWindow: true, url: 'http://*.' + localStorage["domain"] + localStorage['game_path'] + '/*'}, 
 				function(tabs) {
-					chrome.tabs.sendMessage(tabs[0].id, {what: $('#answer_box').val()}, 
-						function(response) {
-							console.log(response);							
-						}
+					chrome.tabs.sendMessage(tabs[0].id, {what: $('#answer_box').val(), username: localStorage['username']}, 
+						function(response) { }
 					);
 					$('#answer_box').val('');
 			});
@@ -20,10 +18,12 @@ $(function() {
 			var sectorsInfoRow = $('#row_sectors_info');
 			var sectorsRow = $('#row_sectors');
 			var correctsRow = $('#corrects');
+			var lastAnswer = $('#last_answer');
 			titleRow.html('');
 			sectorsInfoRow.html('');
 			sectorsRow.html('');
 			correctsRow.html('');
+			lastAnswer.html('');
 			if (request.title) {
 				titleRow.html(request.title);
 			}
@@ -35,6 +35,9 @@ $(function() {
 			}
 			if (request.corrects) {
 				correctsRow.html(request.corrects);
+			}
+			if (request.last_answer) {
+				lastAnswer.html(request.last_answer);
 			}
 			var bonus_count = '?';
 			var bonus_done_count = '?';
