@@ -5,11 +5,17 @@
 	<script src="jquery-1.11.0.min.js"></script>    
   </head>
   <body>
-  <label for="host_name">Домен</label>
-  <input id="host_name"></input>
-  <br>
-  <label for="game_path">Относительный путь</label>
-  <input id="game_path" style="min-width:300px;"></input>
+  <label>http://
+    <select id="host_name">
+      <option value="*.en.cx">*.en.cx</option>
+      <option value="*.encounter.cx">*.encounter.cx</option>
+      <option value="*.encounter.ru">*.encounter.ru</option>
+      <option value="*.en-world.org">*.en-world.org</option>
+      <option value="*.quest.ua">*.quest.ua</option>
+      <option value="quest.ua">quest.ua</option>
+   </select>
+   </label>
+  <label><input id="game_path" style="min-width:300px;"></input>/*</label>
   <br>
   <label for="username">Ник</label>
   <input id="username"></input>

@@ -9,6 +9,7 @@ function save_options() {
 
   // Update status to let user know options were saved.
   var status = $("#status");
+//sd
   status.html("Options Saved.");
   setTimeout(function() {
     status.html("");

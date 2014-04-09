@@ -1,16 +1,19 @@
 $(function() {
-	$('#answer_box').change(
-		function() {			
-			chrome.tabs.query({currentWindow: true, url: 'http://*.' + localStorage["domain"] + localStorage['game_path'] + '/*'}, 
+	$('#answer_box').change(submitAnswer);
+	$('#queue').html(chrome.extension.getBackgroundPage().getAnswers());
+	$('#queue').click(function(){chrome.extension.getBackgroundPage().clearAnswers(); $('#queue').html(chrome.extension.getBackgroundPage().getAnswers())});
+	
+	function submitAnswer() {			
+			chrome.tabs.query({currentWindow: true, url: 'http://' + localStorage["domain"] + localStorage['game_path'] + '/*'}, 
 				function(tabs) {
-					chrome.tabs.sendMessage(tabs[0].id, {what: $('#answer_box').val(), username: localStorage['username']}, 
+					var answer = $('#answer_box').val();
+					chrome.tabs.sendMessage(tabs[0].id, {what: answer, username: localStorage['username']}, 
 						function(response) { }
 					);
+					chrome.extension.getBackgroundPage().addAnswer(answer);
 					$('#answer_box').val('');
 			});
-			
 		}
-	);
 	
 	chrome.runtime.onMessage.addListener(
 		function(request, sender, sendResponse) {
@@ -39,6 +42,10 @@ $(function() {
 			if (request.last_answer) {
 				lastAnswer.html(request.last_answer);
 			}
+			if (request.last_code) {
+				chrome.extension.getBackgroundPage().removeAnswer(request.last_code);
+			}
+			$('#queue').html(chrome.extension.getBackgroundPage().getAnswers());
 			var bonus_count = '?';
 			var bonus_done_count = '?';
 			if (typeof request.bonus_count != 'undefined') {
@@ -48,6 +55,11 @@ $(function() {
 				bonus_done_count = request.done_bonus_count;
 			}
 			$('#bonus_info').html('Выполнено бонусов ' + bonus_done_count + '. Осталось ' + bonus_count);
+			var backAnswer = chrome.extension.getBackgroundPage().getAnswer();
+			if (backAnswer) {
+				$('#answer_box').val(backAnswer);
+				submitAnswer();
+			}
 		}
 	);
 });

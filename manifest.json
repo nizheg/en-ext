@@ -14,7 +14,7 @@
    ],
   "content_scripts": [
     {
-      "matches": ["http://*.en.cx/*", "http://*.encounter.cx/*", "http://*.encounter.ru/*", "http://*.en-world.org/*"],      
+      "matches": ["http://*.en.cx/*", "http://*.encounter.cx/*", "http://*.encounter.ru/*", "http://*.en-world.org/*", "http://quest.ua/*", "http://*.quest.ua/*"],      
       "js": ["jquery-1.11.0.min.js", "content.js"]
     }
   ],
