@@ -6,6 +6,9 @@ if (!localStorage['game_path']) {
 }
 
 var answers = [];
+var currLevelInfo = "";
+var currBonusInfo = "";
+var currSectorsInfo = "";
 
 function addAnswer(val) {
 	answers.push(val);
@@ -23,7 +26,7 @@ function getAnswers() {
 }
 
 function getAnswer() {
-	return answers.shift();
+	return answers[0];
 }
 
 function clearAnswers() {
