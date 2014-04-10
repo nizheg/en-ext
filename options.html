@@ -1,29 +1,34 @@
 ﻿<!doctype html>
 <html>
-  <head>
-    <title>Settings</title>      
-	<script src="jquery-1.11.0.min.js"></script>    
-  </head>
-  <body>
-  <label>http://
-    <select id="host_name">
-      <option value="*.en.cx">*.en.cx</option>
-      <option value="*.encounter.cx">*.encounter.cx</option>
-      <option value="*.encounter.ru">*.encounter.ru</option>
-      <option value="*.en-world.org">*.en-world.org</option>
-      <option value="*.quest.ua">*.quest.ua</option>
-      <option value="quest.ua">quest.ua</option>
-   </select>
-   </label>
-  <label><input id="game_path" style="min-width:300px;"></input>/*</label>
-  <br>
-  <label for="username">Ник</label>
-  <input id="username"></input>
-  <br>
-	<div id="status"></div>
-	<button id="save">Save</button>
-  
-  </body>
-  <script src="options.js"></script>
+	<head>
+		<title>Настройки</title>      
+		<script src="jquery-1.11.0.min.js"></script>    
+	</head>
+	<style>
+		.path-setting {
+			font-family:monospace;
+			margin:0px;
+			padding:0px;
+			color:brown;
+			border: 0px;
+			-webkit-appearance: none;
+		}
+	</style>
+	<body>
+		Движок: <label class="path-setting">http://<select id="host_name" style="margin:0px;" class="path-setting">
+			<option value="*.en.cx">*.en.cx</option>
+			<option value="*.encounter.cx">*.encounter.cx</option>
+			<option value="*.encounter.ru">*.encounter.ru</option>
+			<option value="*.en-world.org">*.en-world.org</option>
+			<option value="*.quest.ua">*.quest.ua</option>
+			<option value="quest.ua">quest.ua</option>
+			</select></label><!--
+		 --><label class="path-setting"><input id="game_path" class="path-setting"></input>/*</label>
+		 <br>
+		<label>Ник <input id="username"></input></label>
+		<div id="status"></div>
+		<button id="save">Сохранить</button>  
+	</body>
+	<script src="options.js"></script>
 </html>
 

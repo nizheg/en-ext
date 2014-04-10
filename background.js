@@ -1,10 +1,11 @@
-var answers = [];
 if (!localStorage['domain']) {
 	localStorage['domain'] = "*.en.cx";
 }
 if (!localStorage['game_path']) {
 	localStorage['game_path'] = "/gameengines/encounter/play";
 }
+
+var answers = [];
 
 function addAnswer(val) {
 	answers.push(val);

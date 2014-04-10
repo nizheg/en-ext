@@ -29,22 +29,28 @@
 	  p {
 		margin: 1px;
 	  }
+	  #queue {
+		font-style: oblique
+	  }
+	  #clear_queue, #start_queue {
+		cursor:pointer;
+	  }
     </style>    
 	<script src="jquery-1.11.0.min.js"></script>
     <script src="popup.js"></script>
   </head>
   <body>  
 	<input id="answer_box" type="text" autofocus style="float:right"></input>
-	<div>Очередь:<span id='queue'></span></div>
-	
+	<div><img id="clear_queue" src="RemoveIcon.png" alt="Очистить очередь"/> <img id="start_queue" alt="Запустить обработку" src="go.png"/>&nbsp;&nbsp;<span id='queue'></span></div>
 	<table width = "400px">
-		<tr><td id="last_answer"></td></tr>
-		<tr><td id="corrects"></td></tr>
-		<tr><td><hr/></td></tr>
-		<tr><td id="row_title"></td></tr>	
-		<tr><td id="bonus_info"></td></tr>
-		<tr><td id="row_sectors_info"></td></tr>
-		<tr><td id="row_sectors"></td></tr>
+		<tr><td class="info-row" id="last_answer"></td></tr>
+		<tr><td class="info-row" id="corrects"></td></tr>
+		<tr><td class="info-row hr"></td></tr>
+		<tr><td class="info-row" id="row_title"></td></tr>	
+		<tr><td class="info-row" id="bonus_info"></td></tr>
+		<tr><td class="info-row" id="row_sectors_info"></td></tr>
+		<tr><td class="info-row hr"></td></tr>
+		<tr><td class="info-row" id="row_sectors"></td></tr>
 	</table>	
   </body>
 </html>
