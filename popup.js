@@ -71,7 +71,6 @@ $(function() {
 		var titleRow = $('#row_title');
 		var sectorsInfoRow = $('#row_sectors_info');
 		var sectorsRow = $('#row_sectors');
-		var correctsRow = $('#corrects');
 		var lastAnswer = $('#last_answer');
 		if (request.title) {
 			titleRow.html(request.title);
@@ -95,9 +94,6 @@ $(function() {
 		}
 		if (request.sectors) {
 			sectorsRow.html(request.sectors);
-		}
-		if (request.corrects) {
-			correctsRow.html(request.corrects);
 		}
 		if (request.last_answer) {
 			lastAnswer.html(request.last_answer);

@@ -2,52 +2,15 @@
 <html>
   <head>
     <title>Encounter helper</title>
-    <style>
-      body {        
-        overflow-x: hidden;
-      }
-	  .color_correct {
-		color: green;
-		font-weight: bolder;
-	  }
-	  .color_incorrect {
-		color: red;
-		font-weight: bolder;
-	  }
-	  .color_sec {
-	  }
-	  .color_dis {
-	    color: rgb(172, 170, 185);
-	  }
-	  .color_bonus {
-		color: navy;
-		font-weight: bolder;
-	  }
-	  #row_title {
-		font-size: large;
-	  }
-	  p {
-		margin: 1px;
-	  }
-	  #queue {
-		font-style: oblique
-	  }
-	  #clear_queue, #start_queue {
-		cursor:pointer;
-	  }
-          .changed {
-          	background-color:red;
-          }
-    </style>    
+	<link href="popup.css" rel="stylesheet">	
 	<script src="jquery-1.11.0.min.js"></script>
     <script src="popup.js"></script>
   </head>
   <body>  
-	<input id="answer_box" type="text" autofocus style="float:right"></input>
+	<input id="answer_box" type="text" autofocus></input>
 	<div><img id="clear_queue" src="RemoveIcon.png" alt="Очистить очередь"/> <img id="start_queue" alt="Запустить обработку" src="go.png"/>&nbsp;&nbsp;<span id='queue'></span></div>
 	<table width = "400px">
 		<tr><td class="info-row" id="last_answer"></td></tr>
-		<tr><td class="info-row" id="corrects"></td></tr>
 		<tr><td class="info-row hr"></td></tr>
 		<tr><td class="info-row" id="row_title"></td></tr>	
 		<tr><td class="info-row" id="bonus_info"></td></tr>

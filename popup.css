@@ -1,0 +1,50 @@
+body {        
+	overflow-x: hidden;
+}
+
+p {
+	margin: 1px;
+}
+
+.color_correct {
+	color: green;
+	font-weight: bolder;
+}
+
+.color_incorrect {
+	color: red;
+	font-weight: bolder;
+}
+
+.color_sec {
+}
+
+.color_dis {
+	color: rgb(172, 170, 185);
+}
+
+.color_bonus {
+	color: navy;
+	font-weight: bolder;
+}
+
+#row_title {
+	font-size: large;
+}
+
+#queue {
+	font-style: oblique
+}
+
+#clear_queue, #start_queue {
+	cursor:pointer;
+}
+
+#answer_box {
+	float:right;
+}
+
+.changed {
+	background-color:red;
+}
+  
