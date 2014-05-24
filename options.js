@@ -6,11 +6,11 @@
 
 // Saves options to localStorage.
 function save_options() {
-	chrome.storage.sync.set({"en_user" : localStorage["username"]});
 	for (var i = 0; i < optionsMap.length; i++) {
 		var value = $('#' + optionsMap[i].html_id).val();
 		localStorage[optionsMap[i].storage_id] = value;
 	}	
+	chrome.storage.sync.set({"en_user" : localStorage["username"]});
 	// Update status to let user know options were saved.
 	var status = $("#status");
 	status.html("Настройки сохранены");

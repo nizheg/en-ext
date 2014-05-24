@@ -18,6 +18,9 @@ $(function() {
 	var sectors_info = $('div.content h3[class!=timer]:first').text().trim();
 	var sectors = $('div.content .cols-wrapper').html();
 	var last_answer = $('ul.history li:contains("' + localStorage['username'] + '"):nth(0)');
+	if (last_answer.length == 0) {
+		last_answer = $('ul.history li:nth(0)');
+	}
 	var last_code = $('span', last_answer).text().trim();
 	var done_bonus = $('div.content h3.color_correct').size();
 	var bonus = $('div.content h3.color_bonus').size();
