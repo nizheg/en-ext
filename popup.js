@@ -1,5 +1,6 @@
 $(function() {
 	var isChanged = false;
+	var isInProcess = false;
 	printQueue();
 	$('#answer_box').change(submitAnswer);	
 	$('#clear_queue').click(clearQueue);
@@ -26,8 +27,10 @@ $(function() {
 		var answer = $('#answer_box').val();
 		$('#answer_box').val('');
 		chrome.extension.getBackgroundPage().addAnswer(answer);
-		printQueue();		
-		processQueue();
+		printQueue();
+		if (!isInProcess) {
+			processQueue();
+		}
 	}
 	
 	function clearQueue() {
@@ -42,13 +45,19 @@ $(function() {
 	function processQueue() {
 		var backAnswer = chrome.extension.getBackgroundPage().getAnswer();
 		if (backAnswer) {
+			isInProcess = true;
 			chrome.tabs.query({currentWindow: true, url: 'http://' + localStorage["domain"] + localStorage['game_path'] + '/*'}, 
 			function(tabs) {
 				chrome.tabs.sendMessage(tabs[0].id, 
 					{ what: backAnswer, username: localStorage['username'] },
 					function(response) { });
 			});
-		}
+		}	
+	}
+	
+	function processFinished(answer) {
+		chrome.extension.getBackgroundPage().removeAnswer(answer);
+		isInProcess = false;
 	}
 	
 	function clearInfoTable() {
@@ -111,11 +120,11 @@ $(function() {
 		}
 		$('#bonus_info').html('Выполнено бонусов ' + bonus_done_count + '. Осталось ' + bonus_count);
 		if (request.last_code) {
-			chrome.extension.getBackgroundPage().removeAnswer(request.last_code);
-		}  else {
+			processFinished(request.last_code);
+		} else {
 			isChanged = true;
 			lastAnswer.addClass('changed');
-			lastAnswer.html('Введенный код не распознан! Проверьте настройки вашего логина.');
+			lastAnswer.html('Введенный код не распознан!');
 		}
 	}
 });
