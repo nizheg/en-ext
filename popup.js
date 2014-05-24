@@ -47,11 +47,10 @@ $(function() {
 		if (backAnswer) {
 			isInProcess = true;
 			chrome.tabs.query({currentWindow: true, url: 'http://' + localStorage["domain"] + localStorage['game_path'] + '/*'}, 
-			function(tabs) {
-				chrome.tabs.sendMessage(tabs[0].id, 
-					{ what: backAnswer, username: localStorage['username'] },
-					function(response) { });
-			});
+				function(tabs) {
+					chrome.tabs.sendMessage(tabs[0].id, { what: backAnswer }, function(response) { });
+				}
+			);
 		}	
 	}
 	

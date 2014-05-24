@@ -3,11 +3,10 @@ function submitAnswer(answer) {
 	$('.container .aside form:first').submit();
 }
 
+chrome.storage.sync.get('en_user', function(items) { if (items.en_user) {localStorage['username'] = items.en_user} });
+
 chrome.runtime.onMessage.addListener(
 		function(request, sender, sendResponse) {
-			if (request.username) {
-				localStorage['username'] = request.username;
-			}			
 			if (request.what) {
 				submitAnswer(request.what);
 			}			
