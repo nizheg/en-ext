@@ -24,6 +24,7 @@ $(function() {
 	var done_bonus = $('div.content h3.color_correct').size();
 	var bonus = $('div.content h3.color_bonus').size();
 	chrome.runtime.sendMessage({
+		"id" : "content",
 		"title" : title,
 		"sectors_info" : sectors_info,
 		"sectors" : sectors,

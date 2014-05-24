@@ -9,6 +9,15 @@ var answers = [];
 var currLevelInfo = "";
 var currBonusInfo = "";
 var currSectorsInfo = "";
+var actualInfo;
+
+chrome.runtime.onMessage.addListener(
+	function(request, sender, sendResponse) {
+		if (request.id == "content") {
+			actualInfo = request;
+		}
+	}
+);
 
 function addAnswer(val) {
 	answers.push(val);

@@ -5,13 +5,19 @@ $(function() {
 	$('#clear_queue').click(clearQueue);
 	$('#start_queue').click(processQueue);
 	
+	if (chrome.extension.getBackgroundPage().actualInfo) {
+		processPageRequest(chrome.extension.getBackgroundPage().actualInfo);
+	}
+	
 	chrome.runtime.onMessage.addListener(
 		function(request, sender, sendResponse) {
-			clearInfoTable();
-			processPageRequest(request);			
-			printQueue();
-			if (!isChanged) {
-				processQueue();
+			if (request.id == "content") {
+				clearInfoTable();
+				processPageRequest(request);			
+				printQueue();
+				if (!isChanged) {
+					processQueue();
+				}
 			}
 		}
 	);
@@ -106,6 +112,10 @@ $(function() {
 		$('#bonus_info').html('Выполнено бонусов ' + bonus_done_count + '. Осталось ' + bonus_count);
 		if (request.last_code) {
 			chrome.extension.getBackgroundPage().removeAnswer(request.last_code);
+		}  else {
+			isChanged = true;
+			lastAnswer.addClass('changed');
+			lastAnswer.html('Введенный код не распознан! Проверьте настройки вашего логина.');
 		}
 	}
 });
