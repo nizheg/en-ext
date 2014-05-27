@@ -34,4 +34,7 @@ $(function() {
 		"done_bonus_count" : done_bonus,
 		"bonus_count" : bonus
 	}, function(response) {});
+	var hints = [];
+	$('h3:contains(Подсказка) + p').each(function() { hints.push($(this).html()); });
+	chrome.runtime.sendMessage({"id" : "hint", "hints" : hints}, function(response) { });
 });

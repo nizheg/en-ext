@@ -10,6 +10,20 @@ var currLevelInfo = "";
 var currBonusInfo = "";
 var currSectorsInfo = "";
 var actualInfo;
+var hints = [];
+
+chrome.runtime.onMessage.addListener(
+	function(request, sender, sendResponse) {
+		if (request.id == "hint" && webkitNotifications && request.hints.length != hints.length) {
+			if (request.hints[request.hints.length - 1]) {
+				var notification = webkitNotifications.createNotification('', 'Hint!', request.hints[request.hints.length - 1]);
+				notification.onclick = function() { notification.cancel(); };
+				notification.show();
+			}
+			hints = request.hints;
+		}
+	}
+);
 
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse) {
