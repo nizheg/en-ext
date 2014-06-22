@@ -1,8 +1,10 @@
 $(function() {
+	var englishKeys = 'qwertyuiop\[\]asdfghjkl;\'zxcvbnm,./';
+	var russianKeys = 'йцукенгшщзхъфывапролджэячсмитьбю.'; 
 	var isChanged = false;
 	var isInProcess = false;
 	printQueue();
-	$('#answer_box').change(submitAnswer);	
+	$('#answer_box').keydown(onkeydown);
 	$('#clear_queue').click(clearQueue);
 	$('#start_queue').click(processQueue);
 	
@@ -22,6 +24,44 @@ $(function() {
 			}
 		}
 	);
+
+	function onkeydown(e) {
+		var answerValue = $(this).val();
+		switch(e.which) {
+			case 38: 
+			case 40:
+				var result = []; 
+				for (var i = 0; i < answerValue.length; i++) {
+					var index = russianKeys.indexOf(answerValue[i]);
+					if (index > -1) {
+						result.push((englishKeys[index]));
+					} else {
+						index = englishKeys.indexOf(answerValue[i]);
+						if (index > -1) {
+							result.push((russianKeys[index]));
+						} else {
+							result.push((answerValue[i]));
+						}
+					} 
+				}
+				$(this).val(result.join(''));
+				break;
+			case 13:
+				if (answerValue.length > 0) {
+					submitAnswer();
+				} else {
+					processQueue();
+				}
+				break;
+			case 46:
+				if (e.ctrlKey) {
+					clearQueue();
+					break;
+				}
+			default: return;
+		}
+		e.preventDefault(); 
+	}
 
 	function submitAnswer() {			
 		var answer = $('#answer_box').val();
@@ -77,6 +117,7 @@ $(function() {
 			var isLevelChanged = currLevelInfo != "" && currLevelInfo != request.title;
 			if (isLevelChanged) {
 				titleRow.addClass('changed');
+				clearQueue();
 			}
 			isChanged |= isLevelChanged;
 			chrome.extension.getBackgroundPage().currLevelInfo = request.title;
