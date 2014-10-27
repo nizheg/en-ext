@@ -3,6 +3,7 @@ $(function() {
 	var russianKeys = 'йцукенгшщзхъфывапролджэячсмитьбю.'; 
 	var isChanged = false;
 	var isInProcess = false;
+	var gameTabId;
 	printQueue();
 	$('#answer_box').keydown(onkeydown);
 	$('#clear_queue').click(clearQueue);
@@ -20,10 +21,28 @@ $(function() {
 				printQueue();
 				if (!isChanged) {
 					processQueue();
-				}
+				} 
+				processBrutMode(request);
 			}
 		}
 	);
+
+	function processBrutMode(request) {
+		if (localStorage["brut"] == "true") {
+			if (isChanged) {
+				clearQueue();
+				isChanged = false;
+			}
+			if (request.img) {
+				chrome.tabs.query({ active: true }, function(tabs) { 
+					currentTabId = tabs[0].id;
+					if (currentTabId != gameTabId) {
+						chrome.tabs.update({ url: request.img }); 
+					}
+				});						
+			}
+		}
+	}
 
 	function onkeydown(e) {
 		var answerValue = $(this).val();
@@ -88,7 +107,8 @@ $(function() {
 			isInProcess = true;
 			chrome.tabs.query({currentWindow: true, url: 'http://' + localStorage["domain"] + localStorage['game_path'] + '/*'}, 
 				function(tabs) {
-					chrome.tabs.sendMessage(tabs[0].id, { what: backAnswer }, function(response) { });
+					gameTabId = tabs[0].id;
+					chrome.tabs.sendMessage(gameTabId, { what: backAnswer }, function(response) { });
 				}
 			);
 		}	

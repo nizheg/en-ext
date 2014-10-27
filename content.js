@@ -24,6 +24,7 @@ $(function() {
 	var last_code = $('span', last_answer).text().trim();
 	var done_bonus = $('div.content h3.color_correct').size();
 	var bonus = $('div.content h3.color_bonus').size();
+	var img = $('div.content img').last().attr('src');
 	chrome.runtime.sendMessage({
 		"id" : "content",
 		"title" : title,
@@ -32,7 +33,8 @@ $(function() {
 		"last_answer" : last_answer.html(),
 		"last_code" : last_code,
 		"done_bonus_count" : done_bonus,
-		"bonus_count" : bonus
+		"bonus_count" : bonus,
+		"img" : img
 	}, function(response) {});
 	var hints = [];
 	$('h3:contains(Подсказка) + p').each(function() { hints.push($(this).html()); });

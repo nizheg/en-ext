@@ -1,13 +1,18 @@
 ﻿var optionsMap = [ 
 	{"html_id": "host_name", "storage_id" : "domain"},
 	{"html_id": "game_path", "storage_id" : "game_path"},
-	{"html_id": "username", "storage_id" : "username"}
+	{"html_id": "username", "storage_id" : "username"},
+	{"html_id": "brut", "storage_id" : "brut"}
 ];
 
 // Saves options to localStorage.
 function save_options() {
 	for (var i = 0; i < optionsMap.length; i++) {
-		var value = $('#' + optionsMap[i].html_id).val();
+		var elem = $('#' + optionsMap[i].html_id);
+		var value = elem.val();
+		if (elem.is(':checkbox')) {
+			value = elem.prop("checked");
+		}
 		localStorage[optionsMap[i].storage_id] = value;
 	}	
 	chrome.storage.sync.set({"en_user" : localStorage["username"]});
@@ -22,8 +27,12 @@ function restore_options() {
 	for (var i = 0; i < optionsMap.length; i++) {
 		var value = localStorage[optionsMap[i].storage_id];
 		if (value) {
-			$('#' + optionsMap[i].html_id).val(value);
-		}		
+			var elem = $('#' + optionsMap[i].html_id)
+			elem.val(value);
+			if (elem.is(':checkbox') && value == "true") {
+				elem.prop("checked", true);
+			}
+		}
 	}
 }
 
